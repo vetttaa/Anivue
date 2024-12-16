@@ -1,0 +1,17 @@
+{
+  "dependencies": {
+    "nuxt": "latest",
+    "vue": "latest",
+    "vue-router": "latest",
+    "@pinia/nuxt": "^0.9.0",
+    "pinia": "^2.3.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.17.0",
+    "eslint": "^9.17.0",
+    "eslint-plugin-vue": "^9.32.0",
+    "globals": "^15.13.0",
+    "prettier": "3.4.2",
+    "typescript-eslint": "^8.18.0"
+  }
+}
