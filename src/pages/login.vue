@@ -1,28 +1,31 @@
 <template>
-  <div>
-    <div class="title">
-      <h2>Login</h2>
-    </div>
-    <div class="container form">
-      <label for="uname"><b>Username</b></label>
-      <input
-          v-model="user.username"
-          type="text"
-          class="input"
-          placeholder="Enter Username"
-          name="uname"
-          required
-      />
-      <label for="psw"><b>Password</b></label>
-      <input
-          v-model="user.password"
-          type="password"
-          class="input"
-          placeholder="Enter Password"
-          name="psw"
-          required
-      />
-      <button @click.prevent="login" class="button">Login</button>
+  <div class="login">
+    <AutoSwitchSlider/>
+    <div class="login__container">
+      <div class="login__logo">
+        <LogoIcon/>
+      </div>
+      <div class="login__form">
+        <div class="login__form_inputs">
+          <input
+              v-model="user.username"
+              type="text"
+              class="input"
+              placeholder="Введите имя"
+              name="uname"
+              required
+          />
+          <input
+              v-model="user.password"
+              type="password"
+              class="input"
+              placeholder="Введите пароль"
+              name="psw"
+              required
+          />
+        </div>
+        <UiButton @click.prevent="login">войти</UiButton>
+      </div>
     </div>
   </div>
 </template>
@@ -30,6 +33,9 @@
 import {ref} from "vue";
 import {useRouter} from "#imports";
 import {useAuthStore} from "~/store/auth";
+import UiButton from "~/components/ui/buttons/UiButton.vue";
+import LogoIcon from "~/components/icons/LogoIcon.vue";
+import AutoSwitchSlider from "~/components/ui/sliders/AutoSwitchSlider.vue";
 
 const authStore = useAuthStore();
 
@@ -46,3 +52,58 @@ const login = async () => {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+
+.login {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+
+  &__container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: fit-content;
+    padding: 14px;
+    background: #262626;
+    box-shadow: var(--shadow-default);
+    border-radius: 8px;
+    z-index: 2;
+  }
+
+  &__logo {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    &_inputs {
+      display: flex;
+      flex-direction: row;
+      gap: 4px;
+
+      input {
+        padding: 14px 26px;
+        border-radius: 14px;
+        border: 1px solid white;
+        background: transparent;
+        color: var(--basic-50);
+
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+  }
+}
+
+</style>
