@@ -1,25 +1,25 @@
 <template>
-  <div>
-    <header>
+  <div class="default">
+    <header class="header">
       <ul>
-        <li>
-          <NuxtLink to="/">Home</NuxtLink>
+        <li v-if="authStore.authenticated">
+          <NuxtLink to="/about">Аниме</NuxtLink>
         </li>
-        <li>
-          <NuxtLink to="/about">About</NuxtLink>
+        <li v-if="authStore.authenticated">
+          <NuxtLink to="/about">Манга</NuxtLink>
         </li>
-        <li v-if="!authStore" class="loginBtn" style="float: right">
-          <nuxt-link to="/login">Login</nuxt-link>
+        <li v-if="authStore.authenticated">
+          <NuxtLink to="/about">Дорамы</NuxtLink>
         </li>
-        <li v-if="authStore" class="loginBtn" style="float: right">
-          <nuxt-link @click="logout">Logout</nuxt-link>
+        <li v-if="authStore.authenticated" class="loginBtn">
+          <nuxt-link @click="logout">Выйти</nuxt-link>
         </li>
       </ul>
     </header>
     <div class="mainContent">
       <slot/>
     </div>
-    <footer>
+    <footer v-if="authStore.authenticated">
       <h1>Footer</h1>
     </footer>
   </div>
@@ -32,12 +32,10 @@ import {useAuthStore} from "~/store/auth";
 const authStore = useAuthStore();
 const router = useRouter();
 
+console.log(authStore)
+
 const logout = async () => {
   authStore.logout()
   await router.push('/login')
 }
 </script>
-
-<style lang="scss" scoped>
-
-</style>
