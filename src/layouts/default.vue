@@ -8,10 +8,10 @@
         <li>
           <NuxtLink to="/about">About</NuxtLink>
         </li>
-        <li v-if="!authenticated" class="loginBtn" style="float: right">
+        <li v-if="!authStore" class="loginBtn" style="float: right">
           <nuxt-link to="/login">Login</nuxt-link>
         </li>
-        <li v-if="authenticated" class="loginBtn" style="float: right">
+        <li v-if="authStore" class="loginBtn" style="float: right">
           <nuxt-link @click="logout">Logout</nuxt-link>
         </li>
       </ul>
@@ -26,18 +26,15 @@
 </template>
 
 <script setup lang="ts">
-import {useAuthStore} from "store/auth";
-import {storeToRefs} from "pinia";
 import {useRouter} from "#imports";
+import {useAuthStore} from "~/store/auth";
 
 const authStore = useAuthStore();
-const authenticated = storeToRefs(useAuthStore());
-
 const router = useRouter();
 
-const logout = () => {
-  authStore.logUserOut()
-  router.push('/login')
+const logout = async () => {
+  authStore.logout()
+  await router.push('/login')
 }
 </script>
 

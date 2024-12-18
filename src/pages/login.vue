@@ -29,7 +29,7 @@
 <script lang="ts" setup>
 import {ref} from "vue";
 import {useRouter} from "#imports";
-import {useAuthStore} from "store/auth";
+import {useAuthStore} from "~/store/auth";
 
 const authStore = useAuthStore();
 

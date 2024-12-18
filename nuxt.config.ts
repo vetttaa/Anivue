@@ -1,15 +1,9 @@
-import {defineNuxtConfig} from 'nuxt/config'
-
+import { defineNuxtConfig } from "nuxt/config";
 export default defineNuxtConfig({
-	alias: {
-		'store/*': './store/*'
-	},
 	devtools: {enabled: true},
+	srcDir: 'src',
 	modules: ['@pinia/nuxt'],
 	css: ["assets/style/main.scss"],
-	imports: {
-		autoImport: false,
-	},
 	appConfig: {
 		title: 'Привет Nuxt',
 		theme: {

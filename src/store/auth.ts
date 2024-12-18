@@ -1,5 +1,5 @@
 import {defineStore} from "pinia";
-import {useAsyncData, useCookie} from "nuxt/app";
+import {useCookie} from "nuxt/app";
 
 interface UserPayloadInterface {
 	username: string;
@@ -39,7 +39,7 @@ export const useAuthStore = defineStore('auth', {
 			}
 		},
 
-		logUserOut() {
+		logout() {
 			try {
 				const token = useCookie('token')
 				this.authenticated = false;

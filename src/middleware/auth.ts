@@ -1,12 +1,11 @@
 import {abortNavigation, defineNuxtRouteMiddleware, navigateTo, useCookie} from "nuxt/app";
-import {useAuthStore} from "store/auth";
-import {storeToRefs} from "pinia";
+import {useAuthStore} from "~/store/auth";
 
-export default defineNuxtRouteMiddleware((to, from) => {
-	const {authenticated} = storeToRefs(useAuthStore())
+export default defineNuxtRouteMiddleware((to) => {
+	const authStore= useAuthStore()
 	const token = useCookie('token')
 	if (token.value) {
-		authenticated.value = true
+		authStore.authenticated = true
 	}
 	if (token.value && to?.name === 'login') {
 		return navigateTo('/');
