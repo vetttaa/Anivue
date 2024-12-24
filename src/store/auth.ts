@@ -1,13 +1,19 @@
 import {defineStore} from "pinia";
 import {useCookie} from "nuxt/app";
+import {TOKEN_NAME} from "~/contants/tokens";
 
 interface UserPayloadInterface {
 	username: string;
 	password: string;
 }
 
+interface AuthStateInterface {
+	authenticated: boolean;
+	loading: boolean;
+}
+
 export const useAuthStore = defineStore('auth', {
-	state: () => ({
+	state: (): AuthStateInterface => ({
 		authenticated: false,
 		loading: false,
 	}),
@@ -20,14 +26,14 @@ export const useAuthStore = defineStore('auth', {
 					method: 'POST',
 					headers: {'Content-Type': 'application/json'},
 					body: ({
-						username: username,
-						password: password,
+						username,
+						password,
 						expiresInMins: 30
 					})
 				});
 
 				if (response) {
-					const token = useCookie('token')
+					const token = useCookie(TOKEN_NAME)
 					token.value = response
 					console.log(response)
 					this.authenticated = true
@@ -41,7 +47,7 @@ export const useAuthStore = defineStore('auth', {
 
 		logout() {
 			try {
-				const token = useCookie('token')
+				const token = useCookie(TOKEN_NAME)
 				this.authenticated = false;
 				token.value = null;
 			} catch (error) {
