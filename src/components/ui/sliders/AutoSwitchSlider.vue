@@ -5,7 +5,7 @@
         v-for="(slide) in sliderPaths"
         :key="slide"
     >
-      <img :src="slide" alt="слайд">
+      <img :src="slide" alt="слайд" class="keen-slider__slide-image">
     </div>
   </div>
 </template>
@@ -13,7 +13,10 @@
 <script setup>
 import {useKeenSlider} from "keen-slider/vue.es"
 import "keen-slider/keen-slider.min.css"
-import {sliderPaths} from "~/contants/auto-slider";
+import {SLIDERS} from "~/contants/auto-slider";
+
+const src = '/images/login/slide-'
+const sliderPaths = SLIDERS.map(n => `${src}${n}.webp`);
 
 const [container] = useKeenSlider(
     {
@@ -62,7 +65,7 @@ const [container] = useKeenSlider(
   height: 100%;
 
   &__slide {
-    img {
+    &-image {
       width: 100%;
       height: 100%;
       object-fit: cover;

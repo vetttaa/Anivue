@@ -26,7 +26,8 @@ export default [
             'vue/no-new-native-non-primitive': 'error',
             'vue/no-parsing-error': 'error',
             'vue/html-self-closing': ['error', {'html': {'selfClosing': ['div']}}],
-            'vue/multi-word-component-names': 'error'
+            'vue/multi-word-component-names': 'error',
+            'id-naming-convention': 'camelCase'
         }
     },
 ];

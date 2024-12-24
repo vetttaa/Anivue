@@ -1,5 +1,7 @@
 @use './colors' as *;
 @use './decoration' as *;
+@use './reset' as *;
+
 
 * {
   margin: 0;

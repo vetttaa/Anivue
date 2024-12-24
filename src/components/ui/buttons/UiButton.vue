@@ -8,7 +8,6 @@
 </script>
 
 <style lang="scss" scoped>
-
 .button {
   display: flex;
   align-items: center;
@@ -18,7 +17,7 @@
   background: var(--brand-400);
   border-radius: var(--radius-14);
   border: none;
-  transition: 0.3s;
+  transition: background var(--transition-3);
   color: var(--basic-900);
 
   &:hover {
