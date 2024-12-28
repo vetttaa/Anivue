@@ -1,14 +1,12 @@
 <template>
   <header class="header">
     <ul>
-      <template v-if="authStore.authenticated">
-        <li v-for="link in Routes">
+        <li v-for="link in Routes" :key="link">
           <NuxtLink :to="link">{{ link }}</NuxtLink>
         </li>
         <li>
           <NuxtLink @click="logout">Выйти</NuxtLink>
         </li>
-      </template>
     </ul>
   </header>
 </template>
@@ -23,7 +21,7 @@ const router = useRouter();
 
 const logout = async () => {
   authStore.logout()
-  await router.push('/login')
+  await router.push(Routes.LOGIN)
 }
 </script>
 

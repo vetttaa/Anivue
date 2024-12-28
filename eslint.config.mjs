@@ -18,17 +18,20 @@ export default [
         plugins: ['prettier'],
         rules: {
             'prettier/prettier': ['error'],
-            'vue/require-default-prop': 'on',
+            'vue/require-default-prop': ["error"],
             'vue/html-indent': ['error', 4],
             'vue/singleline-html-element-content-newline': 0,
             'vue/component-name-in-template-casing': ['error', 'PascalCase'],
             'vue/no-unused-vars': 'error',
             'vue/no-new-native-non-primitive': 'error',
             'vue/no-parsing-error': 'error',
+            "vue/no-v-for-template-key-on-child": "error",
             'vue/html-self-closing': ['error', {'html': {'selfClosing': ['div']}}],
             'vue/multi-word-component-names': 'error',
-            'id-naming-convention': 'camelCase',
-            "semi": [2, "always"]
+            'id-naming-convention': ["error"],
+            "semi": [2, "always"],
+            "no-unused-vars": ["error"],
+            "no-console": ["error"]
         }
     },
 ];

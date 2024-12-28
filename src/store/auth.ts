@@ -1,6 +1,7 @@
 import {defineStore} from "pinia";
 import {useCookie} from "nuxt/app";
 import {TOKEN_NAME} from "~/contants/tokens";
+import CustomError from "~/utils/CustomError";
 
 interface UserPayload {
 	username: string;
@@ -33,13 +34,12 @@ export const useAuthStore = defineStore('auth', {
 				});
 
 				if (response) {
-					const token = useCookie(TOKEN_NAME)
-					token.value = response
-					console.log(response)
-					this.authenticated = true
+					const token = useCookie(TOKEN_NAME);
+					token.value = response;
+					this.authenticated = true;
 				}
 			} catch (error) {
-				console.error('Ошибка при аутентификации:', error);
+				new CustomError('Ошибка при аутентификации').log();
 			} finally {
 				this.loading = false;
 			}
@@ -47,11 +47,11 @@ export const useAuthStore = defineStore('auth', {
 
 		logout() {
 			try {
-				const token = useCookie(TOKEN_NAME)
+				const token = useCookie(TOKEN_NAME);
 				this.authenticated = false;
 				token.value = null;
 			} catch (error) {
-				console.error('Ошибка при выходе из системы:', error);
+				new CustomError('Ошибка при выходе из системы:').log();
 			}
 		}
 	},

@@ -1,7 +1,6 @@
 import {abortNavigation, defineNuxtRouteMiddleware, navigateTo, useCookie} from "#imports";
 import {useAuthStore} from "~/store/auth";
 import {TOKEN_NAME} from "~/contants/tokens";
-import Router from "#app/plugins/router";
 import {Routes} from "~/contants/routes";
 
 export default defineNuxtRouteMiddleware((to) => {
