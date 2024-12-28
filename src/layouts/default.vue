@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <LayoutHeader/>
+    <LayoutHeader v-if="authStore.authenticated"/>
     <slot/>
     <LayoutFooter v-if="authStore.authenticated"/>
   </div>
