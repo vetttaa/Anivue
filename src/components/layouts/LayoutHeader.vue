@@ -1,12 +1,14 @@
 <template>
   <header class="header">
     <ul>
-      <li v-if="authStore.authenticated" v-for="link in Routes">
-        <NuxtLink :to="link">{{ link }}</NuxtLink>
-      </li>
-      <li v-if="authStore.authenticated" class="loginBtn">
-        <NuxtLink @click="logout">Выйти</NuxtLink>
-      </li>
+      <template v-if="authStore.authenticated">
+        <li v-for="link in Routes">
+          <NuxtLink :to="link">{{ link }}</NuxtLink>
+        </li>
+        <li>
+          <NuxtLink @click="logout">Выйти</NuxtLink>
+        </li>
+      </template>
     </ul>
   </header>
 </template>

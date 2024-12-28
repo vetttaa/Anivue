@@ -1,5 +1,5 @@
 <template>
-  <div class="login">
+  <section class="login">
     <AutoSwitchSlider/>
     <div class="login__container">
       <div class="login__logo">
@@ -31,7 +31,7 @@
         <UiButton type="submit" @click.prevent="login">войти</UiButton>
       </div>
     </div>
-  </div>
+  </section>
 </template>
 <script lang="ts" setup>
 import {useRouter} from "#imports";
