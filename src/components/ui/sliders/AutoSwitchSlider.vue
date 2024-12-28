@@ -1,11 +1,10 @@
 <template>
   <div ref="container" class="keen-slider">
     <div
+        v-for="n in 3"
         class="keen-slider__slide"
-        v-for="(slide) in sliderPaths"
-        :key="slide"
     >
-      <img :src="slide" alt="слайд" class="keen-slider__slide-image">
+      <img :src="`/images/login/slide-${n}.webp`" alt="slide" class="keen-slider__slide-image">
     </div>
   </div>
 </template>
@@ -13,10 +12,6 @@
 <script setup>
 import {useKeenSlider} from "keen-slider/vue.es"
 import "keen-slider/keen-slider.min.css"
-import {SLIDERS} from "~/contants/auto-slider";
-
-const src = '/images/login/slide-'
-const sliderPaths = SLIDERS.map(n => `${src}${n}.webp`);
 
 const [container] = useKeenSlider(
     {

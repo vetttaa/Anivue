@@ -1,5 +1,5 @@
 <template>
- <button class="button">
+ <button class="ui-button">
    <slot/>
  </button>
 </template>
@@ -8,7 +8,7 @@
 </script>
 
 <style lang="scss" scoped>
-.button {
+.ui-button {
   display: flex;
   align-items: center;
   justify-content: center;

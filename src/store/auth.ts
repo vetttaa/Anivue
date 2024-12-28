@@ -2,23 +2,23 @@ import {defineStore} from "pinia";
 import {useCookie} from "nuxt/app";
 import {TOKEN_NAME} from "~/contants/tokens";
 
-interface UserPayloadInterface {
+interface UserPayload {
 	username: string;
 	password: string;
 }
 
-interface AuthStateInterface {
+interface AuthState {
 	authenticated: boolean;
 	loading: boolean;
 }
 
 export const useAuthStore = defineStore('auth', {
-	state: (): AuthStateInterface => ({
+	state: (): AuthState => ({
 		authenticated: false,
 		loading: false,
 	}),
 	actions: {
-		async authenticateUser({username, password}: UserPayloadInterface) {
+		async authenticateUser({username, password}: UserPayload) {
 			try {
 				this.loading = true;
 
