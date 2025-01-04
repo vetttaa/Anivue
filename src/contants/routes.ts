@@ -1,6 +1,6 @@
 export enum Routes {
-	ANIME = 'anime',
-	MANGA = 'manga',
-	DORAMAS = 'doramas',
-	LOGIN = 'login'
+  ANIME = 'anime',
+  MANGA = 'manga',
+  DORAMAS = 'doramas',
+  LOGIN = 'login',
 }

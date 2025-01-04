@@ -1,37 +1,12 @@
-import globals from "globals";
-import pluginJs from "@eslint/js";
-import tseslint from "typescript-eslint";
-import pluginVue from "eslint-plugin-vue";
+import antfu from '@antfu/eslint-config';
 
-/** @type {import('eslint').Linter.Config[]} */
-export default [
-    {files: ["**/*.{js,mjs,cjs,ts,vue}"]},
-    {languageOptions: {globals: globals.browser}},
-    pluginJs.configs.recommended,
-    ...tseslint.configs.recommended,
-    ...pluginVue.configs["flat/essential"],
-    {
-        files: ["**/*.vue"],
-        languageOptions: {parserOptions: {parser: tseslint.parser}},
-    },
-    {
-        plugins: ['prettier'],
-        rules: {
-            'prettier/prettier': ['error'],
-            'vue/require-default-prop': ["error"],
-            'vue/html-indent': ['error', 4],
-            'vue/singleline-html-element-content-newline': 0,
-            'vue/component-name-in-template-casing': ['error', 'PascalCase'],
-            'vue/no-unused-vars': 'error',
-            'vue/no-new-native-non-primitive': 'error',
-            'vue/no-parsing-error': 'error',
-            "vue/no-v-for-template-key-on-child": "error",
-            'vue/html-self-closing': ['error', {'html': {'selfClosing': ['div']}}],
-            'vue/multi-word-component-names': 'error',
-            'id-naming-convention': ["error"],
-            "semi": [2, "always"],
-            "no-unused-vars": ["error"],
-            "no-console": ["error"]
-        }
-    },
-];
+export default antfu({
+  stylistic: {
+    indent: 2,
+    quotes: 'single',
+  },
+  rules: {
+    'eslint-comments/no-unlimited-disable': ['off'],
+    'style/semi': ['error', 'always'],
+  },
+});
