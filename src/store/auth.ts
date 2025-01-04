@@ -39,7 +39,8 @@ export const useAuthStore = defineStore('auth', {
 					this.authenticated = true;
 				}
 			} catch (error) {
-				new CustomError('Ошибка при аутентификации').log();
+				const LoginError = CustomError.create({ message: 'Ошибка при аутентификации' })
+				CustomError.log(LoginError);
 			} finally {
 				this.loading = false;
 			}
@@ -51,7 +52,8 @@ export const useAuthStore = defineStore('auth', {
 				this.authenticated = false;
 				token.value = null;
 			} catch (error) {
-				new CustomError('Ошибка при выходе из системы:').log();
+				const ExitError = CustomError.create({ message: 'Ошибка при выходе из системы' })
+				CustomError.log(ExitError);
 			}
 		}
 	},
