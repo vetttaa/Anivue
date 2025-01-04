@@ -1,11 +1,18 @@
+type CustomErrorType = {
+	message: string;
+	code: number;
+}
+
 class CustomError extends Error {
-	constructor(message: string) {
-		super(message);
-		this.name = 'CustomError'
+	static create(message: Partial<CustomErrorType> = {})  {
+		const error = new Error()
+		error.name = 'CustomError'
+		Object.assign(error, message)
+		return error
 	}
 
-	log(): void {
-		console.error(`ERROR ${this.message}`);
+	static log(error: Error): void {
+		console.error(`ERROR ${error.message}`);
 	}
 }
 
