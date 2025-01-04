@@ -1,19 +1,28 @@
-type CustomErrorType = {
-	message: string;
-	code: number;
+interface CustomErrorType extends Omit<Error, 'name'> {
+  message: string
+  code?: number
+  name?: string
 }
 
 class CustomError extends Error {
-	static create(message: Partial<CustomErrorType> = {})  {
-		const error = new Error()
-		error.name = 'CustomError'
-		Object.assign(error, message)
-		return error
-	}
+  static _error: CustomErrorType = {
+    message: '',
+    name: this.name,
+  };
 
-	static log(error: Error): void {
-		console.error(`ERROR ${error.message}`);
-	}
+  static create(message: CustomErrorType) {
+    Object.assign(this._error, message);
+    return this;
+  }
+
+  static log(): void {
+    // eslint-disable-next-line
+    console.log(`ERROR ${this._error.message}`)
+  }
+
+  static error() {
+    console.error(`ERROR ${this._error.message}`);
+  }
 }
 
-export default CustomError
+export default CustomError;

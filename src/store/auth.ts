@@ -1,61 +1,61 @@
-import {defineStore} from "pinia";
-import {useCookie} from "nuxt/app";
-import {TOKEN_NAME} from "~/contants/tokens";
-import CustomError from "~/utils/CustomError";
+import { useCookie } from 'nuxt/app';
+import { defineStore } from 'pinia';
+import { TOKEN_NAME } from '~/contants/tokens';
+import CustomError from '~/utils/CustomError';
 
 interface UserPayload {
-	username: string;
-	password: string;
+  username: string
+  password: string
 }
 
 interface AuthState {
-	authenticated: boolean;
-	loading: boolean;
+  authenticated: boolean
+  loading: boolean
 }
 
 export const useAuthStore = defineStore('auth', {
-	state: (): AuthState => ({
-		authenticated: false,
-		loading: false,
-	}),
-	actions: {
-		async authenticateUser({username, password}: UserPayload) {
-			try {
-				this.loading = true;
+  state: (): AuthState => ({
+    authenticated: false,
+    loading: false,
+  }),
+  actions: {
+    async authenticateUser({ username, password }: UserPayload) {
+      try {
+        this.loading = true;
 
-				const response = await $fetch('https://dummyjson.com/auth/login', {
-					method: 'POST',
-					headers: {'Content-Type': 'application/json'},
-					body: ({
-						username,
-						password,
-						expiresInMins: 30
-					})
-				});
+        const response = await $fetch('https://dummyjson.com/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: ({
+            username,
+            password,
+            expiresInMins: 30,
+          }),
+        });
 
-				if (response) {
-					const token = useCookie(TOKEN_NAME);
-					token.value = response;
-					this.authenticated = true;
-				}
-			} catch (error) {
-				const LoginError = CustomError.create({ message: 'Ошибка при аутентификации' })
-				CustomError.log(LoginError);
-			} finally {
-				this.loading = false;
-			}
-		},
+        if (response) {
+          const token = useCookie(TOKEN_NAME);
+          token.value = response;
+          this.authenticated = true;
+        }
+      }
+      catch {
+        CustomError.create({ message: 'Ошибка при аутентификации' }).error();
+      }
+      finally {
+        this.loading = false;
+      }
+    },
 
-		logout() {
-			try {
-				const token = useCookie(TOKEN_NAME);
-				this.authenticated = false;
-				token.value = null;
-			} catch (error) {
-				const ExitError = CustomError.create({ message: 'Ошибка при выходе из системы' })
-				CustomError.log(ExitError);
-			}
-		}
-	},
+    logout() {
+      try {
+        const token = useCookie(TOKEN_NAME);
+        this.authenticated = false;
+        token.value = null;
+      }
+      catch {
+        CustomError.create({ message: 'Ошибка при выходе из системы' }).error();
+      }
+    },
+  },
 });
-
